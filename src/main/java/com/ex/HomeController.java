@@ -75,14 +75,10 @@ public class HomeController {
 		return new ModelAndView("index");
 	}
 
-	@RequestMapping(value = "/page1")
+	@RequestMapping(value = "/forminput")
 	@ResponseBody
 	public ModelAndView page1() {
-		return new ModelAndView("page1");
+		return new ModelAndView("forminput");
 	}
-	@RequestMapping(value = "/page2")
-	@ResponseBody
-	public ModelAndView page2() {
-		return new ModelAndView("page2");
-	}
+
 }

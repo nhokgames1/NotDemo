@@ -15,7 +15,7 @@ public class NotDemoApplication {
 		return application.sources(NotDemoApplication.class);
 	}
 
-	public static void main(String[] args) {
+	public static  void main(String[] args) {
 		SpringApplication.run(NotDemoApplication.class, args);
 	}
 }

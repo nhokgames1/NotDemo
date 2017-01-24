@@ -4,4 +4,9 @@ app.controller('myCtrl', function($scope,$http) {
 	 $http.get($scope.url).then(function(response) {
 	 $scope.arrStudent = response.data;
 			  	});
+	 
+app.controller('Show',function($scope)  {
+	console.log($scope.id);
+
+})	 
 	});

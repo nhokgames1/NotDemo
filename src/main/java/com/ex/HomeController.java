@@ -54,7 +54,7 @@ public class HomeController {
 	@RequestMapping(value = "/home")
 	@ResponseBody
 	public ModelAndView md() {
-		return new ModelAndView("NewFile");
+		return new ModelAndView("angularjs-list");
 	}
 
 	@RequestMapping(value = "/demo")
@@ -84,5 +84,15 @@ public class HomeController {
 	@ResponseBody
 	public ModelAndView page2() {
 		return new ModelAndView("formoutput");
+	}
+	@RequestMapping(value = "/page1")
+	@ResponseBody
+	public ModelAndView page3() {
+		return new ModelAndView("page1");
+	}
+	@RequestMapping(value = "/page2")
+	@ResponseBody
+	public ModelAndView page4() {
+		return new ModelAndView("page2");
 	}
 }

@@ -1,27 +1,62 @@
-var app = angular.module('plunker', []);
+var app = angular.module('yeah', ['ngRoute']);
 
-app.controller('MainCtrl', ['tempDataStorageService', function(tempDataStorageService) {
-  
-  var myCtrl = this;
-
-	myCtrl.myCats = angular.copy(tempDataStorageService.cats);
-	
-	myCtrl.localStorage = tempDataStorageService;
-	
-	myCtrl.saveToLocalStorage = function () {
-	  tempDataStorageService.cats = angular.copy(myCtrl.myCats);
-	}
-
+app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider){
+    $routeProvider
+		.when("/", {
+			templateUrl: "http://localhost:8080/Student/page1",
+			controller: "MainCtrl"
+		})
+		.when("/page2", {
+			templateUrl: "http://localhost:8080/Student/page2",
+			controller: "SecondCtrl"
+		})
+		// .otherwise({ redirectTo: '/'})
+		;
 }]);
 
+app.controller('MainCtrl', function($scope, srvShareData, $location) {
+  
+  $scope.dataToShare = [];
+  
+  $scope.shareMyData = function (myValue) {
 
-app.factory('tempDataStorageService', function() {
-    // The service object
-    var storage = this;
+    $scope.dataToShare = myValue;
+    srvShareData.addData($scope.dataToShare);
     
-    storage.cats = [{name: "fluffy", color: "white" }, 
-                {name: "luna", color: "black" }];
-    
-    // return the service object
-    return storage;
+    window.location.href = "http://localhost:8080/Student/page2";
+  }
 });
+
+app.controller('SecondCtrl', function($scope, srvShareData) {
+  
+  $scope.sharedData = srvShareData.getData();
+
+});
+
+app.service('srvShareData', function($window) {
+        var KEY = 'App.SelectedValue';
+
+        var addData = function(newObj) {
+            var mydata = $window.sessionStorage.getItem(KEY);
+            if (mydata) {
+                mydata = JSON.parse(mydata);
+            } else {
+                mydata = [];
+            }
+            mydata.push(newObj);
+            $window.sessionStorage.setItem(KEY, JSON.stringify(mydata));
+        };
+
+        var getData = function(){
+            var mydata = $window.sessionStorage.getItem(KEY);
+            if (mydata) {
+                mydata = JSON.parse(mydata);
+            }
+            return mydata || [];
+        };
+
+        return {
+            addData: addData,
+            getData: getData
+        };
+    });

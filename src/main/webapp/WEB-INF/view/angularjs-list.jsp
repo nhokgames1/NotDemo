@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -53,10 +53,9 @@
 						<td>{{student.startday}}</td>
 						<td>{{student.endday}}</td>
 						<td>
-							<button type="button" class="btn btn-primary btnDetail"
-								data-id="{{staffId}}">View</button>
-							<button ng-click="dfff()" type="button"
-								class="btn btn-primary btnEditUser" data-id="{{staffId}}">Delete</button>
+							<input type="button" class="btn btn-primary btnDetail"
+								ng-model="id"  value="{{student.id}}" ng-click="Show">Get data </button>
+							
 						</td>
 					</tr>
 					<tr>
@@ -69,6 +68,5 @@
 		
 
 	</div>
-	<c:import url="addStudent.jsp" />
 </body>
 </html>

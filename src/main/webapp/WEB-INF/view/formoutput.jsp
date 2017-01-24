@@ -20,13 +20,15 @@
 </head>
 <body ng-app="plunker">
   
-    <h1>Angular Service To Share Data Between Controllers</h1>
-  
-    <div ng-controller="SecondCtrl">
-  
-      <p>{{ sharedData }}</p>
-      
-    </div>
-    
+    <hr>
+    <h3 class="text-info">This is what is stored</h3>
+    <div class="form-group">
+        <h3 class="text-success">Cats: Local Storage List</h3>
+        <div ng-repeat="cat in mainCtrl.localStorage.cats">
+          Name: <input type="text" ng-model="cat.name">
+          Color: <input type="text"ng-model="cat.color">
+        </div>
+        <button type="button" class="btn btn-success" ng-click="mainCtrl.saveToLocalStorage()">Save Changes</button>
+  </div>
   </body>
 </html>

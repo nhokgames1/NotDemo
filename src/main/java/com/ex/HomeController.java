@@ -80,5 +80,9 @@ public class HomeController {
 	public ModelAndView page1() {
 		return new ModelAndView("forminput");
 	}
-
+	@RequestMapping(value = "/formoutput")
+	@ResponseBody
+	public ModelAndView page2() {
+		return new ModelAndView("formoutput");
+	}
 }

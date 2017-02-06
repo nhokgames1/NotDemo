@@ -17,23 +17,22 @@
 <script src="../resources/js/angular.min.js"></script>
 <script src="../resources/js/bootstrap.min.js"></script>
 <script src="../resources/js/student.js"></script> 
-<script src="../resources/js/addStudent.js"></script>
-
+<script src="../resources/js/postApp.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Danh sách Student</title>
 
 
 </head>
+
 <body ng-app="myApp" ng-controller="myCtrl">
 
 	<div>
 		<h1>List student</h1>
 		<!-- <div id="listProject"></div> -->
-		  <button id="btnAddStudent"class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Add Project</button>
-		<div id="tplList">
-
-			<table class="table table-striped">
+		  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Student</button>
+		  
+					<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -53,20 +52,169 @@
 						<td>{{student.startday}}</td>
 						<td>{{student.endday}}</td>
 						<td>
-							<input type="button" class="btn btn-primary btnDetail"
-								ng-model="id"  value="{{student.id}}" ng-click="Show">Get data </button>
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalEdit" ng-click="selectUser(student)">Edit</button>
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalDelete">Delete</button>
 							
 						</td>
 					</tr>
-					<tr>
-						<td colspan="10" style="text-align: center;">No Record Found</td>
-					</tr>
-				</tbody>
+									</tbody>
 			</table>
 
 		</div>
-		
+<div id="myModalDelete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Are you sure ?</h4>
+      </div>
+      <div class="modal-body">
+       <strong style="color:red;">
+       You are going to delete ... 
+       </strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        
+      </div>
+    </div>
+
+  </div>
+</div>
+
+		
+<div id="myModalEdit" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-group" role="form" >
+			<div class="form-group">
+			<label for="inputName" class="col-sm-2 control-label">Name</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="txtfullname"
+					ng-model="clickedUser.name" placeholder="FullName" > <span
+					style="font-size: 11px; color: red" id="errortxtfullname"></span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="inputSubject" class="col-sm-2 control-label">Subject</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="txtstaffcode"
+					ng-model="clickedUser.subject" placeholder="Subject"> <span
+					style="font-size: 11px; color: red" id="errortxtstaffcode"></span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="inputStart" class="col-sm-2 control-label">Start
+				Day</label>
+			<div class="col-sm-10">
+				<input type="date" class="form-control" id="txtstaffcode"
+					ng-model="clickedUser.startday" placeholder="Start day"> <span
+					style="font-size: 11px; color: red" id="errortxtstaffcode"></span>
+			</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="inputEnd" class="col-sm-2 control-label">End day</label>
+				<div class="col-sm-10">
+					<input type="date" class="form-control" id="txtstaffcode"
+						ng-model="clickedUser.enddday" placeholder="End day"> <span
+						style="font-size: 11px; color: red" id="errortxtstaffcode"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label"></label>
+			<div class="col-sm-10">
+		<button type="submit"   ng-click="updateUser()" class="btn btn-info btn-lg">Save</button>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Add -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add User</h4>
+      </div>
+      <div class="modal-body">
+     <!--Form to add-->
+     
+      <div  style="display: block;"
+		class="form-horizontal">
+		<form class="form-group" role="form" >
+			<div class="form-group">
+			<label for="inputName" class="col-sm-2 control-label">Name</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="txtfullname"
+					ng-model="user.name" placeholder="FullName" > <span
+					style="font-size: 11px; color: red" id="errortxtfullname"></span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="inputSubject" class="col-sm-2 control-label">Subject</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="txtstaffcode"
+					ng-model="user.subject" placeholder="Subject"> <span
+					style="font-size: 11px; color: red" id="errortxtstaffcode"></span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="inputStart" class="col-sm-2 control-label">Start
+				Day</label>
+			<div class="col-sm-10">
+				<input type="date" class="form-control" id="txtstaffcode"
+					ng-model="user.startday" placeholder="Start day"> <span
+					style="font-size: 11px; color: red" id="errortxtstaffcode"></span>
+			</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="inputEnd" class="col-sm-2 control-label">End day</label>
+				<div class="col-sm-10">
+					<input type="date" class="form-control" id="txtstaffcode"
+						ng-model="user.endday" placeholder="End day"> <span
+						style="font-size: 11px; color: red" id="errortxtstaffcode"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label"></label>
+			<div class="col-sm-10">
+		<button id="btnAddUser"  ng-click="saveUser()" class="btn btn-info btn-lg">Add</button>
+		</form>
+		</div>
+		</div>
 	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+<!-- Modal -->
+
+
 </body>
 </html>

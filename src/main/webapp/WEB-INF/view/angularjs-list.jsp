@@ -85,7 +85,7 @@
   </div>
 </div>
 
-		
+		<!-- Edit -->
 <div id="myModalEdit" class="modal fade" role="dialog">
   <div class="modal-dialog">
 

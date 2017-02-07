@@ -86,9 +86,15 @@
 
   </div>
 </div>
+<<<<<<< HEAD
 		
 <!-- Delete-->		
 <div id="myModalDelete" class="modal fade" role="dialog">
+=======
+
+		<!-- Edit -->
+<div id="myModalEdit" class="modal fade" role="dialog">
+>>>>>>> origin/master
   <div class="modal-dialog">
 
     <!-- Modal content-->

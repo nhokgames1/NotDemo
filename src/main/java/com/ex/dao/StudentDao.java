@@ -13,5 +13,5 @@ import com.ex.model.Student;
 public interface StudentDao extends JpaRepository<Student,Long> {
 		@Query("from Student s where s.name=:studentName")
 		public Student getStudentByName(@Param("studentName")String binhSV);
-			
+		
 }	

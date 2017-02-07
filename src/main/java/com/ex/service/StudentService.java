@@ -12,12 +12,15 @@ import com.ex.model.Student;
 public class StudentService {
 	@Autowired
 	private StudentDao studentdao;
-	public List<Student> getAllStudents(){
+
+	public List<Student> getAllStudents() {
 		return studentdao.findAll();
 	}
+
 	public void delete(Long id) {
 		studentdao.delete(id);
 	}
+
 	public void add(Student student) {
 		studentdao.save(student);
 	}
@@ -28,8 +31,20 @@ public class StudentService {
 		std.setSubject(student.getSubject());
 		studentdao.save(std);
 	}
+
 	public Student getStudentByName(String name) {
 		return studentdao.getStudentByName(name);
-		
+
+	}
+
+	public boolean checkLogin(Student studentfuckyou) {
+		boolean result = false;
+		Student student = studentdao.getStudentByName(studentfuckyou.getName());
+		if (student != null) {
+			if (student.getSubject().equals(studentfuckyou.getSubject())) {
+				result = true;
+			}
+		}
+		return result;
 	}
 }

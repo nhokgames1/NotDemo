@@ -95,4 +95,9 @@ public class HomeController {
 	public ModelAndView page4() {
 		return new ModelAndView("page2");
 	}
+	@RequestMapping(value = "/login")
+	@ResponseBody
+	public ModelAndView loginPage() {
+		return new ModelAndView("login");
+	}
 }

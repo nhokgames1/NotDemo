@@ -2,7 +2,7 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope,$http) {
 	 $scope.url  = 'http://localhost:8080/Student/student';
-	 $http.get($scope.url).then(function(response) {
+	 $http.get($scope.url,{header : {'Content-Type' : 'application/json; charset=UTF-8'}}).then(function(response) {
 	 $scope.arrStudent = response.data;
 	 $scope.user={};
 
@@ -13,7 +13,7 @@ app.controller('myCtrl', function($scope,$http) {
 	 		method: 'POST',
         		url     : '/Student/add',
                 data    : $scope.user, //forms user object
-                headers : {'Content-Type': 'application/json'} 
+                headers : {'Content-Type': 'application/json;charset=UTF-8'} 
 	 	})
 	 	.success(function(data){
 
@@ -33,7 +33,7 @@ app.controller('myCtrl', function($scope,$http) {
 	 		method: 'PUT',
 	 		url: '/Student/update/'+user.id,
 	 		data : $scope.user,
-	 		headers : {'Content-Type': 'application/json'}
+	 		headers : {'Content-Type': 'application/json; charset=UTF-8'}
 
 	 	})
 	 }

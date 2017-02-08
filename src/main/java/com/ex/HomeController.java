@@ -19,10 +19,9 @@ public class HomeController {
 	@Autowired
 	private StudentService studentservice;
 
-	@RequestMapping(value = "/student", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/student", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public List<Student> getAllStudent() {
-
 		return studentservice.getAllStudents();
 	}
 
@@ -32,7 +31,7 @@ public class HomeController {
 		studentservice.delete(id);
 	}
 
-	@RequestMapping(value = "/search/{name}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/search/{name}", method = RequestMethod.GET, produces = { "application/json; charset=UTF-8" })
 	@ResponseBody
 	public Student searchByName(@PathVariable("name") String name) {
 		return studentservice.getStudentByName(name);

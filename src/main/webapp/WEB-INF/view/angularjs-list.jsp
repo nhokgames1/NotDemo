@@ -19,7 +19,7 @@
 <script src="../resources/js/student.js"></script> 
 <script src="../resources/js/postApp.js"></script>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Danh sách Student</title>
 
 
@@ -180,7 +180,7 @@
 				Day</label>
 			<div class="col-sm-10">
 				<input type="date" class="form-control"
-					ng-model="clickedUser.startday" placeholder="Start day"> 
+					ng-model="clickedUser.startday | date" placeholder="Start day"> 
 			</div>
 			</div>
 			<br><br>
@@ -188,7 +188,7 @@
 				<label for="inputEnd" class="col-sm-2 control-label">End day</label>
 				<div class="col-sm-10">
 					<input type="date" class="form-control" 
-						ng-model="clickedUser.enddday" placeholder="End day"> 
+						ng-model="clickedUser.enddday | date" placeholder="End day"> 
 				</div>
 			</div>
 			<br>

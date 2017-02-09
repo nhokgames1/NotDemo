@@ -50,8 +50,8 @@
 						<td>{{student.id}}</td>
 						<td>{{student.name}}</td>
 						<td>{{student.subject}}</td>
-						<td>{{student.startday | date }}</td>
-						<td>{{student.endday  | date}}</td>
+						<td>{{student.startday  }}</td>
+						<td>{{student.endday }}</td>
 						<td>
 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalEdit" ng-click="selectUser(student)">Edit</button>
 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalDelete" ng-click="selectUser(student)">Delete</button>
@@ -171,7 +171,7 @@
 			<label for="inputSubject" class="col-sm-2 control-label">Subject</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" 
-					ng-model="clickedUser.subject" placeholder="Subject"> 
+					ng-value="clickedUser.subject" placeholder="Subject"> 
 			</div>
 		</div>
 		<br><br>
@@ -180,7 +180,7 @@
 				Day</label>
 			<div class="col-sm-10">
 				<input type="date" class="form-control"
-					ng-model="clickedUser.startday | date" placeholder="Start day"> 
+					ng-value="clickedUser.startday | date" placeholder="Start day"> 
 			</div>
 			</div>
 			<br><br>
@@ -188,7 +188,7 @@
 				<label for="inputEnd" class="col-sm-2 control-label">End day</label>
 				<div class="col-sm-10">
 					<input type="date" class="form-control" 
-						ng-model="clickedUser.enddday | date" placeholder="End day"> 
+						ng-value="clickedUser.enddday | date" placeholder="End day"> 
 				</div>
 			</div>
 			<br>

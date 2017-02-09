@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.ex.util.JsonDateSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "student")
@@ -56,18 +57,18 @@ public class Student {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "start")
-	@JsonSerialize(using = JsonDateSerializer.class )
+	@JsonFormat(pattern="yyyy-MM-dd")
 	public Date getStartday() {
 		return startday;
 	}
-	@JsonSerialize(using=JsonDateSerializer.class)
+	
 	public void setStartday(Date startday) {
 		this.startday = startday;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "end")
-	@JsonSerialize(using = JsonDateSerializer.class )
+	@JsonFormat(pattern="yyyy-MM-dd")
 	public Date getEndday() {
 		return endday;
 	}

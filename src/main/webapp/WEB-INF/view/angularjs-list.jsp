@@ -179,16 +179,16 @@
 			<label for="inputStart" class="col-sm-2 control-label">Start
 				Day</label>
 			<div class="col-sm-10">
-				<input type="date" class="form-control"
-					ng-value="clickedUser.startday | date" placeholder="Start day"> 
+				<input type="text" class="form-control"
+					ng-value="clickedUser.startday" placeholder="Start day"> 
 			</div>
 			</div>
 			<br><br>
 			<div class="form-group">
 				<label for="inputEnd" class="col-sm-2 control-label">End day</label>
 				<div class="col-sm-10">
-					<input type="date" class="form-control" 
-						ng-value="clickedUser.enddday | date" placeholder="End day"> 
+					<input type="text" class="form-control" 
+						ng-value="clickedUser.enddday" placeholder="End day"> 
 				</div>
 			</div>
 			<br>

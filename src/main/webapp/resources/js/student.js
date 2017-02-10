@@ -1,6 +1,7 @@
 var app = angular.module('myApp', []);
 
-app.controller('myCtrl', function($scope,$http) {
+app.controller('myCtrl', function($scope,$http,$window) {
+	
 	 $scope.url  = 'http://localhost:8080/Student/student';
 	 $http.get($scope.url,{header : {'Content-Type' : 'application/json; charset=UTF-8'}}).then(function(response) {
 	 $scope.arrStudent = response.data;
@@ -8,7 +9,7 @@ app.controller('myCtrl', function($scope,$http) {
 
 	 //add user to server
 	 $scope.saveUser = function() {
-	 	console.log($scope.user)
+	 	console.log($scope.user);
 	 	$http({
 	 		method: 'POST',
         		url     : '/Student/add',
@@ -47,6 +48,25 @@ app.controller('myCtrl', function($scope,$http) {
 	 		headers : {'Content-Type': 'application/json'}
 	 	})
 
+	 }
+	 $scope.login= function(){
+	 	console.log($scope.user);
+	 	$http({
+	 		method: 'POST',
+        		url     : '/Student/login',
+                data    : $scope.user, //forms user object
+                headers : {'Content-Type': 'application/json;charset=UTF-8'} 
+	 	})
+	 	.then(function mydata(response,$window){
+	 		$scope.data=response.data;
+	 		console.log($scope.data);
+	 		if ($scope.data==true) {
+	 			$window.location.href = '/index.html';
+
+	 		}
+	 		else 
+	 			alert('Login failure');
+	 	})
 	 }
 // app.controller('Add',function($scope) {
 // 	$scope.user={};

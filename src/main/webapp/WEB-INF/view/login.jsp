@@ -17,11 +17,14 @@
 <script src="../resources/js/jquery-ui.min.js"></script>
 <script src="../resources/js/angular.min.js"></script>
 <script src="../resources/js/bootstrap.min.js"></script>
+<script src="../resources/js/student.js"></script> 
+
+<script src="../resources/js/angular-route.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body ng-app="myApp" ng-controller="myCtrl">
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-7">
@@ -34,14 +37,14 @@
                         <label for="inputEmail3" class="col-sm-3 control-label">
                             Email</label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" required>
+                            <input ng-model="user.name" type="text" class="form-control" id="inputEmail3" placeholder="Email" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-3 control-label">
                             Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
+                            <input  ng-model="user.subject" type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -56,10 +59,9 @@
                     </div>
                     <div class="form-group last">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <button type="submit" class="btn btn-success btn-sm">
+                            <button ng-click="login()" type="submit" class="btn btn-success btn-sm">
                                 Sign in</button>
-                                 <button type="reset" class="btn btn-default btn-sm">
-                                Reset</button>
+                                
                         </div>
                     </div>
                     </form>

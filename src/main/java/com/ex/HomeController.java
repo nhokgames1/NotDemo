@@ -31,7 +31,8 @@ public class HomeController {
 		studentservice.delete(id);
 	}
 
-	@RequestMapping(value = "/search/{name}", method = RequestMethod.GET, produces = { "application/json; charset=UTF-8" })
+	@RequestMapping(value = "/search/{name}", method = RequestMethod.GET, produces = {
+			"application/json; charset=UTF-8" })
 	@ResponseBody
 	public Student searchByName(@PathVariable("name") String name) {
 		return studentservice.getStudentByName(name);
@@ -79,24 +80,38 @@ public class HomeController {
 	public ModelAndView page1() {
 		return new ModelAndView("forminput");
 	}
+
 	@RequestMapping(value = "/formoutput")
 	@ResponseBody
 	public ModelAndView page2() {
 		return new ModelAndView("formoutput");
 	}
+
 	@RequestMapping(value = "/page1")
 	@ResponseBody
 	public ModelAndView page3() {
 		return new ModelAndView("page1");
 	}
+
 	@RequestMapping(value = "/page2")
 	@ResponseBody
 	public ModelAndView page4() {
 		return new ModelAndView("page2");
 	}
-	@RequestMapping(value = "/login")
+
+	@RequestMapping(value = "/loginPage")
 	@ResponseBody
 	public ModelAndView loginPage() {
 		return new ModelAndView("login");
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = { "application/json; charset=UTF-8" })
+	@ResponseBody
+	public boolean login(@RequestBody Student student) {
+		if (studentservice.checkLogin(student) == true) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

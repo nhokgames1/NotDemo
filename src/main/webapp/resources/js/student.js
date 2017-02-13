@@ -61,11 +61,12 @@ app.controller('myCtrl', function($scope,$http,$window) {
 	 		$scope.data=response.data;
 	 		console.log($scope.data);
 	 		if ($scope.data==true) {
-	 			$window.location.href = '/index.html';
+	 			window.location.href = "http://localhost:8080/Student/home";
 
 	 		}
 	 		else 
-	 			alert('Login failure');
+	 			$scope.message="Username or Password is incorrect";
+	 			
 	 	})
 	 }
 // app.controller('Add',function($scope) {

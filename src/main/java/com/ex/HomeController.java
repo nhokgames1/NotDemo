@@ -72,7 +72,7 @@ public class HomeController {
 	@RequestMapping(value = "/formB")
 	@ResponseBody
 	public ModelAndView formB() {
-		return new ModelAndView("index");
+		return new ModelAndView("demo");
 	}
 
 	@RequestMapping(value = "/forminput")

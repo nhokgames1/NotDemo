@@ -19,7 +19,7 @@
 <title>Insert title here</title>
 </head>
 <body class="container" ng-controller="DemoController">
-    <div class="row">
+    <!-- <div class="row">
         <h1>angular-form-builder</h1>
         <hr/>
 
@@ -44,15 +44,15 @@
             <div fb-components></div>
         </div>
     </div>
-
+ -->
     <div class="row">
         <h2>Form</h2>
         <hr/>
         <form class="form-horizontal">
-            <div ng-model="input" fb-form="default" fb-default="defaultValue"></div>
+            <div ng-model="input" fb-form="test" fb-default="defaultValue"></div>
             <div class="form-group">
                 <div class="col-md-8 col-md-offset-4">
-                    <input type="submit" ng-click="submit()" class="btn btn-default"/>
+                    <input type="submit" ng-click="add()" class="btn btn-default"/>
                 </div>
             </div>
         </form>

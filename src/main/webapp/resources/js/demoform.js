@@ -2,23 +2,19 @@
   angular.module('app', ['builder', 'builder.components', 'validator.rules']).run([
     '$builder', function($builder) {
       $builder.registerComponent('sampleInput', {});
-      return $builder.registerComponent('name', {
-        group: 'Default',
-        label: 'Name',
-        required: false,
-        arrayToText: true,
-        template: "<div class=\"form-group\">\n    <label for=\"{{formName+index}}\" class=\"col-md-4 control-label\" ng-class=\"{'fb-required':required}\">{{label}}</label>\n    <div class=\"col-md-8\">\n        <input type='hidden' ng-model=\"inputText\" validator-required=\"{{required}}\" validator-group=\"{{formName}}\"/>\n        <div class=\"col-sm-6\" style=\"padding-left: 0;\">\n            <input type=\"text\"\n                ng-model=\"inputArray[0]\"\n                class=\"form-control\" id=\"{{formName+index}}-0\"/>\n            <p class='help-block'>First name</p>\n        </div>\n        <div class=\"col-sm-6\" style=\"padding-left: 0;\">\n            <input type=\"text\"\n                ng-model=\"inputArray[1]\"\n                class=\"form-control\" id=\"{{formName+index}}-1\"/>\n            <p class='help-block'>Last name</p>\n        </div>\n    </div>\n</div>",
-        popoverTemplate: "<form>\n    <div class=\"form-group\">\n        <label class='control-label'>Label</label>\n        <input type='text' ng-model=\"label\" validator=\"[required]\" class='form-control'/>\n    </div>\n    <div class=\"checkbox\">\n        <label>\n            <input type='checkbox' ng-model=\"required\" />\n            Required\n        </label>\n    </div>\n\n    <hr/>\n    <div class='form-group'>\n        <input type='submit' ng-click=\"popover.save($event)\" class='btn btn-primary' value='Save'/>\n        <input type='button' ng-click=\"popover.cancel($event)\" class='btn btn-default' value='Cancel'/>\n        <input type='button' ng-click=\"popover.remove($event)\" class='btn btn-danger' value='Delete'/>\n    </div>\n</form>"
-      });
+      return $builder.registerComponent('name', {});
     }
-  ]).controller('DemoController', [
-    '$scope', '$builder', '$validator', function($scope, $builder, $validator) {
-      var checkbox, textbox;
+  ])
+
+
+  .controller('DemoController', [
+    '$scope', '$builder', '$validator','$http', function($scope, $builder, $validator,$http) {
+      var checkbox, textbox,test;
       textbox = $builder.addFormObject('default', {
         id: 'textbox',
         component: 'textInput',
         label: 'Name',
-        description: 'Your name',
+        description: 'Go way',
         placeholder: 'Your name',
         required: true,
         editable: true
@@ -33,14 +29,83 @@
       $builder.addFormObject('default', {
         component: 'sampleInput'
       });
+     
+
+
+      $http({
+         method: 'GET',
+                url     : '/Student/student',
+                data    : $scope.user, //forms user object
+                headers : {'Content-Type': 'application/json;charset=UTF-8'}
+      }).then(function success(response){
+          $scope.test= response.data[6].subject;
+          $scope.first=$scope.test.replace("[","");
+          $scope.last=$scope.first.replace("]","");
+          // console.log($scope.last);
+          $scope.array= [];
+          $scope.array= angular.fromJson($scope.test);
+
+          $scope.hehe = JSON.stringify($scope.array[0]);
+          console.log($scope.hehe);
+          console.log($scope.array.length);
+          for (i=0;i<$scope.array.length;i++) {
+            $builder.addFormObject('test',$scope.hehe);
+          }
+
+      })
+      
+      $builder.addFormObject('test',{"component":"textInput","editable":true,"index":0,"label":"Hi U","description":"Full Name","placeholder":"Tên của bạn","options":[],"required":false,"validation":"/.*/"});
+      $builder.addFormObject('test',{"component":"radio","editable":true,"index":1,"label":"Radio",
+        "description":"description",
+        "placeholder":"placeholder",
+        "options":["value one","value two"],"required":false,"validation":"/.*/"});
+
+          
       $scope.form = $builder.forms['default'];
+     
       $scope.input = [];
+      console.log($scope.input);
       $scope.defaultValue = {};
       $scope.defaultValue[textbox.id] = 'default value';
       $scope.defaultValue[checkbox.id] = [true, true];
+      $scope.add = function(){
+        // console.log($scope.input);
+        $scope.var =JSON.stringify($scope.input[3]);
+        $scope.count = $scope.input.length;
+        for (i=0; i<$scope.count;i ++) {
+          $builder.addFormObject('test',JSON.stringify($scope.input[i]));
+          
+        }
+        // for (i=0 ,i< $scope.var.length)
+        // $scope.array=angular.toJson($scope.input);
+        
+       
+        
+        // $scope.user={};
+        // $scope.user.name= 'Hi';
+        // $scope.user.subject= $scope.array;
+        
+        // $scope.first = $scope.user.subject.replace("[","");
+        // $scope.last= $scope.first.replace("]","");
+        // console.log($scope.last[0]);
+        
+
+        // $http({
+        //   method: 'POST',
+        //         url     : '/Student/add',
+        //         data    : $scope.user, //forms user object
+        //         headers : {'Content-Type': 'application/json;charset=UTF-8'}
+        // })
+       
+       }
+
       return $scope.submit = function() {
         console.log($scope.form);
         console.log($scope.input);
+       
+
+
+
         return $validator.validate($scope, 'default').success(function() {
           return console.log('success');
         }).error(function() {
@@ -50,7 +115,9 @@
       $scope.getmedata= function() {
         console.log($)
       }
+      
     }
   ]);
+
 
 }).call(this);
